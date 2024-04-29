@@ -127,5 +127,5 @@ def buscarProducto():
 
 
 # <-----------------------------Eliminar un producto-------------------------------->
-#def eliminarProducto():
-  
+def eliminarProducto():
+  print('Eliminar producto')
