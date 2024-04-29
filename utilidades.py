@@ -59,9 +59,6 @@ def sesionVendedor():
     os.system('cls')
     match opcion:
       case 1:
-        print('\n\t\tRegistro de productos\n')
-        registrarProducto()
-      case 2:
         print('\n\t\tLitar productos\n')
         listarProductos()
       case 3:
