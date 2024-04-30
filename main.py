@@ -14,6 +14,8 @@ def main():
   elif usuario == "vendedor" and contrasena == "5678":
     print("\nSesión iniciada correctamente\n")
     sesionVendedor()
-  
+  else:
+    print('Nombre de usuario o contraseña incorrectos')
+    main()  
 if __name__ == "__main__":
   main()

@@ -49,9 +49,9 @@ def sesionAdmin():
 def sesionVendedor():
   print("\t\tBienvenido a la tienda\n")
   print("\t\tSeleccione una opción:")
-  print("\n(1) Registrar producto"
-        "\n(2) Listar productos"
-        "\n(3) Buscar producto"
+  print("\n(1) Listar producto producto"
+        "\n(2) Buscar productos"
+        "\n(3) Registrar una venta"
         "\n(4) Salir\n"
       )
   try:
@@ -61,25 +61,22 @@ def sesionVendedor():
       case 1:
         print('\n\t\tLitar productos\n')
         listarProductos()
-      case 3:
+      case 2:
         print('\n\t\tBuscar producto\n')
         buscarProducto()
+      case 3:
+        print('\n\t\tRegistrar una venta\n')
+        registrarSalida()
       case 4:
-        print('\n\t\tEliminar producto\n')
-        #eliminarProducto()
-      case 5:
-        print('\n\t\tModificar producto\n')
-      case 6:
-        print('Gracias por usar el programa')
+        print('\n\t\tGracias por usar el programa\n')
         exit()
       case _:
-        print('Opción no válida')
+        print('\n\t\tOpción no válida')
         sesionVendedor()
   except ValueError:
     print('Opción no válida')
     os.system('cls')
     sesionVendedor()
-
 
 # <-----------------------------Registrar un producto-------------------------------->
 def registrarProducto():
@@ -100,6 +97,7 @@ def registrarProducto():
     archivo.close()
   except:
     print('Error al ingresar los datos')
+    os.system('pause')
     os.system('cls')
     registrarProducto()
 
@@ -129,3 +127,23 @@ def buscarProducto():
 # <-----------------------------Eliminar un producto-------------------------------->
 def eliminarProducto():
   print('Eliminar producto')
+
+# <-----------------------------Registrar salida-------------------------------------->
+def registrarSalida():
+  df = pd.read_csv('productos.csv')
+  
+  nombreProducto = str(input('Nombre del prodcuto: '))
+  cantidadProducto = str(input(f'Numero de {nombreProducto}s a vender: '))
+  
+  indice = df.index[df['NOMBRE'] == nombreProducto].tolist()[0]
+  df.loc[indice,'SALIDAS'] = cantidadProducto
+  
+  entradaProducto = df.iloc[indice][4]
+  salidaProducto = df.iloc[indice][5]
+  stock = int(entradaProducto) - int(salidaProducto)
+  
+  df.loc[indice,'STOCK'] = stock
+  df.to_csv('productos.csv',index=False)
+  print('Datos actualizados')
+  print(df.to_string(index=False))
+  
