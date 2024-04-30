@@ -93,7 +93,7 @@ def registrarProducto():
     fechaActual = datetime.date.today().strftime( "%d/%m/%Y")
 
     # Escribir los datos en el archivo
-    archivo.write(nombreProducto + "," + str(fechaActual) + "," + str(precioProducto) + "," + str(precioTotal) + "," + str(cantidadProducto) + "," + "," + "\n")
+    archivo.write(nombreProducto + "," + str(fechaActual) + "," + str(precioProducto) + "," + str(precioTotal) + "," + str(cantidadProducto) + "," + ","+ str(cantidadProducto) + "\n")
     archivo.close()
   except:
     print('Error al ingresar los datos')
