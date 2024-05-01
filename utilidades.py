@@ -136,12 +136,19 @@ def registrarSalida():
   cantidadProducto = str(input(f'Numero de {nombreProducto}s a vender: '))
   
   indice = df.index[df['NOMBRE'] == nombreProducto].tolist()[0]
-  df.loc[indice,'SALIDAS'] = cantidadProducto
+  #df.loc[indice,'SALIDAS'] = cantidadProducto
   
+  #Capturar y almacenar en variables los datos del archivo productos.csv
   entradaProducto = df.iloc[indice][4]
   salidaProducto = df.iloc[indice][5]
-  stock = int(entradaProducto) - int(salidaProducto)
+  stockActual = df.iloc[indice][6]
   
+  #actualizando datos del archivo productos
+  stock = int(stockActual) - int(cantidadProducto)
+  actualizacionSalida = int(salidaProducto) + int(cantidadProducto)
+  
+  #guardar los cambios
+  df.loc[indice,'SALIDAS'] = actualizacionSalida
   df.loc[indice,'STOCK'] = stock
   df.to_csv('productos.csv',index=False)
   print('Datos actualizados')
