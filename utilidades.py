@@ -156,4 +156,11 @@ def registrarSalida():
     df.to_csv('productos.csv',index=False)
     print('Datos actualizados')
     print(df.to_string(index=False))
+
+# Registrar entrada
+def registrarEntrada():
+  df = pd.read.cvs("productos.csv")   #llamo al documento productos
+  nonmbreProducto = input("Ingrese el nombre del producto al que desea registra entrada:  ")  # pido ell nombre del producto al usuario
+  cantidadProducto = input("Ingrese la cantidad de productos entrantes:  ")
+  
   
