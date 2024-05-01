@@ -163,7 +163,7 @@ def registrarSalida():
 
 # Registrar entrada
 def registrarEntrada():
-  df = pd.read_cvs("productos.csv")   #llamo al documento productos
+  df = pd.read_csv("productos.csv")   #llamo al documento productos
   nombreProducto = input("Ingrese el nombre del producto al que desea registra entrada:  ")  # pido ell nombre del producto al usuario
   cantidadAgregada = input("Ingrese la cantidad de productos entrantes:  ")
   indice = df.index[df['NOMBRE'] == nombreProducto].tolist()[0]
@@ -171,7 +171,7 @@ def registrarEntrada():
   entradas = df.iloc[indice,7]
   # stock nuevo
   stockNuevo = int(stock)+int(cantidadAgregada) 
-  actual = int(entrada) + int(cantidadAgregada)
+  actual = int(entradas) + int(cantidadAgregada)
   #guardar cambios
   df.loc[indice,'ULTIMA ENTRADA'] = actual
   df.loc[indice,'STOCK'] = stockNuevo
