@@ -143,14 +143,17 @@ def registrarSalida():
   salidaProducto = df.iloc[indice][5]
   stockActual = df.iloc[indice][6]
   
-  #actualizando datos del archivo productos
-  stock = int(stockActual) - int(cantidadProducto)
-  actualizacionSalida = int(salidaProducto) + int(cantidadProducto)
+  if int(stockActual) < int(cantidadProducto):
+    print(f'La cantidad de {nombreProducto}s no es suficente para consilidar la venta\n')
+  else:
+    #actualizando datos del archivo productos
+    stock = int(stockActual) - int(cantidadProducto)
+    actualizacionSalida = int(salidaProducto) + int(cantidadProducto)
   
-  #guardar los cambios
-  df.loc[indice,'SALIDAS'] = actualizacionSalida
-  df.loc[indice,'STOCK'] = stock
-  df.to_csv('productos.csv',index=False)
-  print('Datos actualizados')
-  print(df.to_string(index=False))
+    #guardar los cambios
+    df.loc[indice,'SALIDAS'] = actualizacionSalida
+    df.loc[indice,'STOCK'] = stock
+    df.to_csv('productos.csv',index=False)
+    print('Datos actualizados')
+    print(df.to_string(index=False))
   
