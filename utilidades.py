@@ -164,4 +164,5 @@ def registrarEntrada():
   cantidadAgregada = input("Ingrese la cantidad de productos entrantes:  ")
   indice = df.index[df['NOMBRE'] == nombreProducto].tolist()[0]
   stock = df.iloc[indice,6]
+  entradas = 0
   stockNuevo = int(stocck)-int(cantidadAgregada) 
