@@ -164,5 +164,13 @@ def registrarEntrada():
   cantidadAgregada = input("Ingrese la cantidad de productos entrantes:  ")
   indice = df.index[df['NOMBRE'] == nombreProducto].tolist()[0]
   stock = df.iloc[indice,6]
-  entradas = 0
-  stockNuevo = int(stocck)-int(cantidadAgregada) 
+  entradas = df.iloc[indice,7]
+  # stock nuevo
+  stockNuevo = int(stock)+int(cantidadAgregada) 
+  actual = int(entrada) + int(cantidadAgregada)
+  #guardar cambios
+  df.loc[indice,'ULTIMA ENTRADA'] = actual
+  df.loc[indice,'STOCK'] = stockNuevo
+  df.to_csv('productos.csv',index=False)
+  print('Datos actualizados')
+  print(df.to_string(index=False))
