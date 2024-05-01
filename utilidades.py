@@ -11,8 +11,9 @@ def sesionAdmin():
         "\n(3) Buscar producto"
         "\n(4) Eliminar producto"
         "\n(5) Modificar producto"
-        "\n(6) Generar reporte"
-        "\n(7) Salir\n"
+        "\n(6) Agregar entrada"
+        "\n(7) Generar reporte"
+        "\n(8) Salir\n"
 )
   try:
     opcion = int(input('Elige una opción: ')) 
@@ -33,9 +34,12 @@ def sesionAdmin():
       case 5:
         print('\n\t\tModificar producto\n')
       case 6:
+        print('\n\t\tAgregar entrada')
+        registrarEntrada()
+      case 7:
         print('Gracias por usar el programa')
         exit()
-      case 7:
+      case 8:
         print('')
       case _:
         print('Opción no válida')
@@ -59,7 +63,7 @@ def sesionVendedor():
     os.system('cls')
     match opcion:
       case 1:
-        print('\n\t\tLitar productos\n')
+        print('\n\t\tListar productos\n')
         listarProductos()
       case 2:
         print('\n\t\tBuscar producto\n')
