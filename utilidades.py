@@ -139,9 +139,9 @@ def registrarSalida():
   #df.loc[indice,'SALIDAS'] = cantidadProducto
   
   #Capturar y almacenar en variables los datos del archivo productos.csv
-  entradaProducto = df.iloc[indice][4]
-  salidaProducto = df.iloc[indice][5]
-  stockActual = df.iloc[indice][6]
+  entradaProducto = df.iloc[indice,4]
+  salidaProducto = df.iloc[indice,5]
+  stockActual = df.iloc[indice,6]
   
   if int(stockActual) < int(cantidadProducto):
     print(f'La cantidad de {nombreProducto}s no es suficente para consilidar la venta\n')
