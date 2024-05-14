@@ -2,6 +2,23 @@ import os
 import pandas as pd
 import datetime
 
+# Mantener la sesion activa 
+def sesionActivaAdmin():
+  sesion = input('¿Quieres salir? \n (1) Si \n (2) No \n')
+  if sesion == '1':
+    print('Gracias por usar el programa')
+    exit()
+  else:
+    os.system('cls')
+    sesionAdmin()
+def sesionActivaVendedor():
+  sesion = input('¿Quieres salir? \n (1) Si \n (2) No \n')
+  if sesion == '1':
+    print('Gracias por usar el programa')
+    exit()
+  else:
+    os.system('cls')
+    sesionVendedor()
 # <------------------------------------Sesion admin---------------------------------->
 def sesionAdmin():
   print("\t\tBienvenido a la tienda\n")
@@ -13,7 +30,7 @@ def sesionAdmin():
         "\n(5) Modificar producto"
         "\n(6) Generar reporte"
         "\n(7) Salir\n"
-)
+  )
   try:
     opcion = int(input('Elige una opción: ')) 
     os.system('cls')
@@ -21,17 +38,22 @@ def sesionAdmin():
       case 1:
         print('\n\t\tRegistro de productos\n')
         registrarProducto()
+        sesionActivaAdmin()
       case 2:
         print('\n\t\tLitar productos\n')
         listarProductos()
+        sesionActivaAdmin()
       case 3:
         print('\n\t\tBuscar producto\n')
         buscarProducto()
+        sesionActivaAdmin()
       case 4:
         print('\n\t\tEliminar producto\n')
         #eliminarProducto()
+        sesionActivaAdmin()
       case 5:
         print('\n\t\tModificar producto\n')
+        sesionActivaAdmin()
       case 6:
         print('Gracias por usar el programa')
         exit()
@@ -61,12 +83,15 @@ def sesionVendedor():
       case 1:
         print('\n\t\tLitar productos\n')
         listarProductos()
+        sesionActivaVendedor()
       case 2:
         print('\n\t\tBuscar producto\n')
         buscarProducto()
+        sesionActivaVendedor()
       case 3:
         print('\n\t\tRegistrar una venta\n')
         registrarSalida()
+        sesionActivaVendedor()
       case 4:
         print('\n\t\tGracias por usar el programa\n')
         exit()
