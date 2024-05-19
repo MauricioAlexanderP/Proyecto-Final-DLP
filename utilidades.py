@@ -4,7 +4,7 @@ import datetime
 
 # Mantener la sesion activa
 def sesionActivaAdmin():
-  sesion = input('¿Quieres salir? \n (1) Si \n (2) No \n')
+  sesion = input('\n¿Quieres salir? \n (1) Si \n (2) No \n')
   if sesion == '1':
     print('Gracias por usar el programa')
     exit()
@@ -12,7 +12,7 @@ def sesionActivaAdmin():
     os.system('cls')
     sesionAdmin()
 def sesionActivaVendedor():
-  sesion = input('¿Quieres salir? \n (1) Si \n (2) No \n')
+  sesion = input('\n¿Quieres salir? \n (1) Si \n (2) No \n')
   if sesion == '1':
     print('Gracias por usar el programa')
     exit()
