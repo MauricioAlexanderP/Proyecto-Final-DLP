@@ -134,19 +134,26 @@ def listarProductos():
 
 # <-----------------------------Buscar un producto---------------------------------->
 def buscarProducto():
-  # Abrir el archivo en modo lectura
-  archivo = open("productos.csv", "r")
+  try:
+    # Abrir el archivo en modo lectura
+    archivo = open("productos.csv", "r")
+    df = pd.read_csv("productos.csv")
+    # Pedir el nombre del producto a buscar
+    nombreProducto = str(input("Ingrese el nombre del producto a buscar: "))
   
-  # Pedir el nombre del producto a buscar
-  nombreProducto = str(input("Ingrese el nombre del producto a buscar: "))
-  
-  # Leer el archivo
-  for linea in archivo:
-    if nombreProducto in linea:
-      print('\nNOMBRE   ,FECHA      ,PRECIO UNITARIO ,PRECIO TOTAL ,STOCK')
-      print(linea + "\n")
-      
-  archivo.close()
+    producto = df.iloc[df.index[df['NOMBRE'] == nombreProducto].tolist()[0],0]
+    if producto == nombreProducto:
+      # Leer el archivo
+      for linea in archivo:
+        if nombreProducto in linea:
+          print('\nNOMBRE             ,FECHA      ,PRECIO UNITARIO ,PRECIO TOTAL ,ENTRADAS ,SALIDAS ,STOCK')
+          print(linea + "\n")  
+    archivo.close()
+  except:
+    print('El Producto no fue encontrado')
+    os.system('pause')
+    os.system('cls')
+    buscarProducto()
 
 
 # <-----------------------------Eliminar un producto-------------------------------->
