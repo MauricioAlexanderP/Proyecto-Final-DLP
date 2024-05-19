@@ -2,7 +2,7 @@ import os
 import pandas as pd
 import datetime
 
-# Mantener la sesion activa 
+# Mantener la sesion activa
 def sesionActivaAdmin():
   sesion = input('¿Quieres salir? \n (1) Si \n (2) No \n')
   if sesion == '1':
@@ -32,7 +32,7 @@ def sesionAdmin():
         "\n(7) Salir\n"
   )
   try:
-    opcion = int(input('Elige una opción: ')) 
+    opcion = int(input('Elige una opción: '))
     os.system('cls')
     match opcion:
       case 1:
@@ -77,7 +77,7 @@ def sesionVendedor():
         "\n(4) Salir\n"
       )
   try:
-    opcion = int(input('Elige una opción: ')) 
+    opcion = int(input('Elige una opción: '))
     os.system('cls')
     match opcion:
       case 1:
@@ -130,7 +130,7 @@ def registrarProducto():
 def listarProductos():
   df = pd.read_csv('productos.csv')
   print(df.to_string(index=False))
-  
+
 
 # <-----------------------------Buscar un producto---------------------------------->
 def buscarProducto():
@@ -138,22 +138,26 @@ def buscarProducto():
     # Abrir el archivo en modo lectura
     archivo = open("productos.csv", "r")
     df = pd.read_csv("productos.csv")
+    
     # Pedir el nombre del producto a buscar
     nombreProducto = str(input("Ingrese el nombre del producto a buscar: "))
-  
-    producto = df.iloc[df.index[df['NOMBRE'] == nombreProducto].tolist()[0],0]
-    if producto == nombreProducto:
-      # Leer el archivo
-      for linea in archivo:
-        if nombreProducto in linea:
-          print('\nNOMBRE             ,FECHA      ,PRECIO UNITARIO ,PRECIO TOTAL ,ENTRADAS ,SALIDAS ,STOCK')
-          print(linea + "\n")  
+    
+    # Buscar el producto en el DataFrame
+    producto = df.iloc[df.index[df['NOMBRE'] == nombreProducto].tolist()[0], :]
+    
+    if not producto.empty:
+        # Imprimir los encabezados con más espacios
+        print(f"{'NOMBRE':<20}{'FECHA':<20}{'PRECIO UNITARIO':<20}{'PRECIO TOTAL':<20}{'ENTRADAS':<20}{'SALIDAS':<20}{'STOCK':<20}")
+        
+        # Imprimir la información del producto con más espacios
+        print(f"{producto['NOMBRE']:<20}{producto['FECHA']:<20}{producto['PRECIO UNITARIO']:<20}{producto['PRECIO TOTAL']:<20}{producto['ENTRADAS']:<20}{producto['SALIDAS']:<20}{producto['STOCK']:<20}")
+    else:
+        print("El Producto no fue encontrado")
+  except Exception as e:
+    print("El Producto no fue encontrado")
+    print(f"Error: {e}")
+  finally:
     archivo.close()
-  except:
-    print('El Producto no fue encontrado')
-    os.system('pause')
-    os.system('cls')
-    buscarProducto()
 
 
 # <-----------------------------Eliminar un producto-------------------------------->
@@ -163,29 +167,28 @@ def eliminarProducto():
 # <-----------------------------Registrar salida-------------------------------------->
 def registrarSalida():
   df = pd.read_csv('productos.csv')
-  
+
   nombreProducto = str(input('Nombre del prodcuto: '))
   cantidadProducto = str(input(f'Numero de {nombreProducto}s a vender: '))
-  
+
   indice = df.index[df['NOMBRE'] == nombreProducto].tolist()[0]
   #df.loc[indice,'SALIDAS'] = cantidadProducto
-  
+
   #Capturar y almacenar en variables los datos del archivo productos.csv
   entradaProducto = df.iloc[indice,4]
   salidaProducto = df.iloc[indice,5]
   stockActual = df.iloc[indice,6]
-  
+
   if int(stockActual) < int(cantidadProducto):
     print(f'La cantidad de {nombreProducto}s no es suficente para consilidar la venta\n')
   else:
     #actualizando datos del archivo productos
     stock = int(stockActual) - int(cantidadProducto)
     actualizacionSalida = int(salidaProducto) + int(cantidadProducto)
-  
+
     #guardar los cambios
     df.loc[indice,'SALIDAS'] = actualizacionSalida
     df.loc[indice,'STOCK'] = stock
     df.to_csv('productos.csv',index=False)
     print('Datos actualizados')
     print(df.to_string(index=False))
-  
