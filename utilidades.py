@@ -11,6 +11,7 @@ def sesionActivaAdmin():
   else:
     os.system('cls')
     sesionAdmin()
+
 def sesionActivaVendedor():
   sesion = input('\n¿Quieres salir? \n (1) Si \n (2) No \n')
   if sesion == '1':
@@ -49,7 +50,7 @@ def sesionAdmin():
         sesionActivaAdmin()
       case 4:
         print('\n\t\tEliminar producto\n')
-        #eliminarProducto()
+        eliminarProducto()
         sesionActivaAdmin()
       case 5:
         print('\n\t\tModificar producto\n')
@@ -162,8 +163,17 @@ def buscarProducto():
 
 # <-----------------------------Eliminar un producto-------------------------------->
 def eliminarProducto():
-  print('Eliminar producto')
+  df = pd.read_csv('productos.csv')
 
+  nombreProducto = str(input('Nombre del producto: '))
+  try:
+    idice = df.index[df['NOMBRE'] == nombreProducto].tolist()[0]
+    df.drop([idice], axis=0, inplace=True)
+    df.to_csv('productos.csv',index=False)
+    print(f'El {nombreProducto} fue eliminado correctamente')
+  except Exception as e:
+    print('Producto no encontrado')
+    print(f'Error: {e}')
 # <-----------------------------Registrar salida-------------------------------------->
 def registrarSalida():
   df = pd.read_csv('productos.csv')
