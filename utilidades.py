@@ -162,8 +162,8 @@ def buscarProducto():
     producto = df.iloc[df.index[df['NOMBRE'] == nombreProducto].tolist()[0], :]
     
     if not producto.empty:
-      print(f"{'NOMBRE':<20}{'FECHA':<20}{'PRECIO UNITARIO':<20}{'PRECIO TOTAL':<20}{'ENTRADAS':<20}{'SALIDAS':<20}{'STOCK':<20}")
-      print(f"{producto['NOMBRE']:<20}{producto['FECHA']:<20}{producto['PRECIO UNITARIO']:<20}{producto['PRECIO TOTAL']:<20}{producto['ENTRADAS']:<20}{producto['SALIDAS']:<20}{producto['STOCK']:<20}")
+      print(f"{'NOMBRE':<16}{'FECHA':<16}{'PRECIO UNITARIO':<16}{'PRECIO TOTAL':<16}{'ENTRADAS':<16}{'SALIDAS':<16}{'STOCK':<16}")
+      print(f"{producto['NOMBRE']:<16}{producto['FECHA']:<16}{producto['PRECIO UNITARIO']:<16}{producto['PRECIO TOTAL']:<16}{producto['ENTRADAS']:<16}{producto['SALIDAS']:<16}{producto['STOCK']:<16}")
     else:
       print("El Producto no fue encontrado")
   except Exception as e:
