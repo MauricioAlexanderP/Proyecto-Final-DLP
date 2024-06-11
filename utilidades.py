@@ -1,122 +1,115 @@
 import os
 import pandas as pd
+import matplotlib.pyplot as plt
 import datetime
 
-def sesionActivaAdmin():
-  """
-  Función que mantiene la sesión activa para el administrador.
-  Permite al administrador salir del programa o volver al menú principal.
-  """
-  sesion = input('\n¿Quieres salir? \n (1) Si \n (2) No \n')
-  if sesion == '1':
-    print('Gracias por usar el programa')
-    exit()
-  else:
-    os.system('cls')
-    sesionAdmin()
 
-def sesionActivaVendedor():
+def limpiarPantalla():
   """
-  Función que mantiene la sesión activa para el vendedor.
-  Permite al vendedor salir del programa o volver al menú principal.
+  Función que limpia la pantalla de la consola.
   """
-  sesion = input('\n¿Quieres salir? \n (1) Si \n (2) No \n')
-  if sesion == '1':
-    print('Gracias por usar el programa')
-    exit()
-  else:
-    os.system('cls')
-    sesionVendedor()
+  os.system('pause')
+  os.system('cls')
 
 def sesionAdmin():
   """
   Función que muestra el menú principal y las opciones disponibles para el administrador.
   Permite al administrador seleccionar una opción y realizar las acciones correspondientes.
   """
-  print("\t\tBienvenido a la tienda\n")
-  print("\t\tSeleccione una opción:")
-  print("\n(1) Registrar producto"
-      "\n(2) Listar productos"
-      "\n(3) Buscar producto"
-      "\n(4) Eliminar producto"
-      "\n(5) Modificar producto"
-      "\n(6) Generar reporte"
-      "\n(7) Salir\n"
-  )
-  try:
-    opcion = int(input('Elige una opción: '))
-    os.system('cls')
-    match opcion:
-      case 1:
-        print('\n\t\tRegistro de productos\n')
-        registrarProducto()
-        sesionActivaAdmin()
-      case 2:
-        print('\n\t\tLitar productos\n')
-        listarProductos()
-        sesionActivaAdmin()
-      case 3:
-        print('\n\t\tBuscar producto\n')
-        buscarProducto()
-        sesionActivaAdmin()
-      case 4:
-        print('\n\t\tEliminar producto\n')
-        eliminarProducto()
-        sesionActivaAdmin()
-      case 5:
-        print('\n\t\tModificar producto\n')
-        sesionActivaAdmin()
-      case 6:
-        print('Gracias por usar el programa')
-        exit()
-      case 7:
-        print('')
-      case _:
-        print('Opción no válida')
-        sesionAdmin()
-  except ValueError:
-    print('Opción no válida')
-    os.system('cls')
-    sesionAdmin()
+  while True:
+    print("\t\tBienvenido a la tienda\n")
+    print("\t\tSeleccione una opción:")
+    print("\n(1) Registrar producto"
+        "\n(2) Listar productos"
+        "\n(3) Buscar producto"
+        "\n(4) Eliminar producto"
+        "\n(5) Modificar producto"
+        "\n(6) Generar reporte"
+        "\n(7) Salir\n"
+    )
+    try:
+      opcion = int(input('Elige una opción: '))
+      os.system('cls')
+      match opcion:
+        case 1:
+          print('\n\t\tRegistro de productos\n')
+          registrarProducto()
+          limpiarPantalla()
+          
+        case 2:
+          print('\n\t\tLitar productos\n')
+          listarProductos()
+          limpiarPantalla()
+
+        case 3:
+          print('\n\t\tBuscar producto\n')
+          buscarProducto()
+          limpiarPantalla()
+
+        case 4:
+          print('\n\t\tEliminar producto\n')
+          eliminarProducto()
+          limpiarPantalla()
+
+        case 5:
+          print('\n\t\tModificar producto\n')
+          limpiarPantalla()
+        case 6:
+          print('\n\t\t Generar reporte de ventas\n')
+          generarReporteVentas()
+          limpiarPantalla()
+        case 7:
+          break
+        case _:
+          print('Opción no válida')
+          sesionAdmin()
+    except ValueError:
+      print('Opción no válida')
+      limpiarPantalla()
+      sesionAdmin()
 
 def sesionVendedor():
   """
   Función que muestra el menú principal y las opciones disponibles para el vendedor.
   Permite al vendedor seleccionar una opción y realizar las acciones correspondientes.
   """
-  print("\t\tBienvenido a la tienda\n")
-  print("\t\tSeleccione una opción:")
-  print("\n(1) Listar producto producto"
-      "\n(2) Buscar productos"
-      "\n(3) Registrar una venta"
-      "\n(4) Salir\n"
-  )
-  try:
-    opcion = int(input('Elige una opción: '))
-    os.system('cls')
-    match opcion:
-      case 1:
-        print('\n\t\tLitar productos\n')
-        listarProductos()
-        sesionActivaVendedor()
-      case 2:
-        print('\n\t\tBuscar producto\n')
-        buscarProducto()
-        sesionActivaVendedor()
-      case 3:
-        print('\n\t\tRegistrar una venta\n')
-        registrarSalida()
-        sesionActivaVendedor()
-      case 4:
-        print('\n\t\tGracias por usar el programa\n')
-        exit()
-      case _:
-        print('\n\t\tOpción no válida')
-        sesionVendedor()
-  except ValueError:
-    print('Opción no válida')
-    os.system('cls')
-    sesionVendedor()
+  while True:
+    print("\t\tBienvenido a la tienda\n")
+    print("\t\tSeleccione una opción:")
+    print("\n(1) Listar producto producto"
+        "\n(2) Buscar productos"
+        "\n(3) Registrar una venta"
+        "\n(4) Salir\n"
+    )
+    try:
+      opcion = int(input('Elige una opción: '))
+      os.system('cls')
+      match opcion:
+        case 1:
+          print('\n\t\tLitar productos\n')
+          listarProductos()
+          limpiarPantalla()
+        
+        case 2:
+          print('\n\t\tBuscar producto\n')
+          buscarProducto()
+          limpiarPantalla()
+        
+        case 3:
+          print('\n\t\tRegistrar una venta\n')
+          registrarSalida()
+          limpiarPantalla()
+        
+        case 4:
+          print('\n\t\tGracias por usar el programa\n')
+          break
+        case _:
+          print('\n\t\tOpción no válida')
+          sesionVendedor()
+    except ValueError:
+      print('Opción no válida')
+      limpiarPantalla()
+      sesionVendedor()
 
 def registrarProducto():
   """
@@ -169,6 +162,8 @@ def buscarProducto():
   except Exception as e:
     print("El Producto no fue encontrado")
     print(f"Error: {e}") 
+    os.system('pause')
+    os.system('cls')
 
 def eliminarProducto():
   """
@@ -186,31 +181,51 @@ def eliminarProducto():
   except Exception as e:
     print('Producto no encontrado')
     print(f'Error: {e}')
+    limpiarPantalla()
+    eliminarProducto()
 
 def registrarSalida():
   """
   Función que registra una salida de productos.
   Lee los datos del archivo CSV, actualiza la cantidad de salidas y el stock del producto.
   """
+  try:
+    df = pd.read_csv('productos.csv')
+
+    nombreProducto = str(input('Nombre del prodcuto: '))
+    cantidadProducto = str(input(f'Numero de {nombreProducto}s a vender: '))
+
+    indice = df.index[df['NOMBRE'] == nombreProducto].tolist()[0]
+
+    salidaProducto = df.iloc[indice,5]
+    stockActual = df.iloc[indice,6]
+  
+    if int(stockActual) < int(cantidadProducto):
+      print(f'La cantidad de {nombreProducto}s no es suficente para consilidar la venta\n')
+    else:
+      stock = int(stockActual) - int(cantidadProducto)
+      actualizacionSalida = int(salidaProducto) + int(cantidadProducto)
+
+      df.loc[indice,'SALIDAS'] = actualizacionSalida
+      df.loc[indice,'STOCK'] = stock
+      df.to_csv('productos.csv',index=False)
+      print('Datos actualizados')
+      print(df.to_string(index=False))
+  except Exception as e:
+    print('Producto no encontrado') 
+
+def generarReporteVentas():
+  """
+  Función que genera un reporte de ventas.
+  Lee los datos del archivo CSV, ordena los productos por cantidad de salidas y genera una gráfica.
+  """
   df = pd.read_csv('productos.csv')
-
-  nombreProducto = str(input('Nombre del prodcuto: '))
-  cantidadProducto = str(input(f'Numero de {nombreProducto}s a vender: '))
-
-  indice = df.index[df['NOMBRE'] == nombreProducto].tolist()[0]
-
-  entradaProducto = df.iloc[indice,4]
-  salidaProducto = df.iloc[indice,5]
-  stockActual = df.iloc[indice,6]
-
-  if int(stockActual) < int(cantidadProducto):
-    print(f'La cantidad de {nombreProducto}s no es suficente para consilidar la venta\n')
-  else:
-    stock = int(stockActual) - int(cantidadProducto)
-    actualizacionSalida = int(salidaProducto) + int(cantidadProducto)
-
-    df.loc[indice,'SALIDAS'] = actualizacionSalida
-    df.loc[indice,'STOCK'] = stock
-    df.to_csv('productos.csv',index=False)
-    print('Datos actualizados')
-    print(df.to_string(index=False))
+  #ordenar los datos segun las ventas
+  dfOrdenado = df.sort_values('SALIDAS', ascending=False)
+  #generar grafica
+  dfOrdenado.plot(kind='bar', x='NOMBRE', y='SALIDAS', title='Ventas por producto') #, color=['b','g','r','y','c','k']
+  plt.tight_layout()
+  fechaActual = datetime.date.today().strftime( "%d-%m-%Y")
+  #gurar grafica
+  plt.savefig(f'report/Reporte-de-ventas-{fechaActual}.png')
+  plt.show()

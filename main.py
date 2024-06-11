@@ -12,7 +12,7 @@ def main():
   
   usuario = input("Usuario: ")
   contrasena = input("\nContraseña: ")
-
+  os.system('cls')
   if usuario == "admin" and contrasena == "1234":
     print("\nSesión iniciada correctamente\n")
     sesionAdmin()
@@ -21,6 +21,8 @@ def main():
     sesionVendedor()
   else:
     print('Nombre de usuario o contraseña incorrectos')
+    os.system('pause')
+    os.system('cls')
     main()
 if __name__ == "__main__":
   main()
