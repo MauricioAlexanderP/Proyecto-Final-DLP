@@ -250,12 +250,28 @@ def generarReporteVentas():
   Lee los datos del archivo CSV, ordena los productos por cantidad de salidas y genera una gráfica.
   """
   df = pd.read_csv('productos.csv')
-  #ordenar los datos segun las ventas
+
+  # Calcular el total de ventas
+  totalVenta = df['SALIDAS'].sum()
+
+  # Ordenar los datos según las ventas
   dfOrdenado = df.sort_values('SALIDAS', ascending=False)
-  #generar grafica
-  dfOrdenado.plot(kind='bar', x='NOMBRE', y='SALIDAS', title='Ventas por producto') #, color=['b','g','r','y','c','k']
-  plt.tight_layout()
-  fechaActual = datetime.date.today().strftime( "%d-%m-%Y")
-  #gurar grafica
+
+# Generar la gráfica
+  ax = dfOrdenado.plot(kind='bar', x='NOMBRE', y='SALIDAS', title='Ventas por producto', legend=False)
+  ax.set_ylabel('Salidas')
+  plt.subplots_adjust(bottom=0.2)
+  plt.figtext(
+    0.1,  
+    0.01, 
+    'Esta gráfica muestra la cantidad de ventas por producto.\n'
+    f'El total de ventas es: ${totalVenta}',
+    ha='left',  # Alineación horizontal
+    fontsize=10  # Tamaño de la fuente
+  )
+  plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+  fechaActual = datetime.date.today().strftime("%d-%m-%Y")
+  # Guardar la gráfica
   plt.savefig(f'report/Reporte-de-ventas-{fechaActual}.png')
+  # Mostrar la gráfica
   plt.show()
