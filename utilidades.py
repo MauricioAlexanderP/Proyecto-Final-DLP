@@ -23,7 +23,7 @@ def sesionAdmin():
         "\n(2) Listar productos"
         "\n(3) Buscar producto"
         "\n(4) Eliminar producto"
-        "\n(5) Modificar producto"
+        "\n(5) Agregar nueva entrada de producto"
         "\n(6) Generar reporte"
         "\n(7) Salir\n"
     )
@@ -52,7 +52,8 @@ def sesionAdmin():
           limpiarPantalla()
 
         case 5:
-          print('\n\t\tModificar producto\n')
+          print('\n\t\tAgregar nueva entrada de producto\n')
+          registrarNuevaEntrada()
           limpiarPantalla()
         case 6:
           print('\n\t\t Generar reporte de ventas\n')
@@ -194,8 +195,12 @@ def registrarSalida():
 
     nombreProducto = str(input('Nombre del prodcuto: '))
     cantidadProducto = str(input(f'Numero de {nombreProducto}s a vender: '))
-
-    indice = df.index[df['NOMBRE'] == nombreProducto].tolist()[0]
+    try:
+      indice = df.index[df['NOMBRE'] == nombreProducto].tolist()[0]
+    except Exception as e:
+      print('Producto no encontrado')
+      limpiarPantalla()
+      registrarSalida()
 
     salidaProducto = df.iloc[indice,5]
     stockActual = df.iloc[indice,6]
@@ -213,6 +218,31 @@ def registrarSalida():
       print(df.to_string(index=False))
   except Exception as e:
     print('Producto no encontrado') 
+
+def registrarNuevaEntrada():
+  df = pd.read_csv("productos.csv")   #llamo al documento productos
+  nombreProducto = input("Ingrese el nombre del producto al que desea registra entrada:  ")  # pido el nombre del producto al usuario
+  cantidadProducto = int(input("Ingrese la cantidad del producto que desea registrar:  "))  # pido la cantidad del producto al usuario
+  #busco el producto en el documento
+  try:
+    indice = df.index[df['NOMBRE'] == nombreProducto].tolist()[0]
+  except Exception as e:
+    print("Producto no encontrado")
+  #obtener los datos del producto
+  entradaActual = df.iloc[indice,4]
+  stockActual = df.iloc[indice,6]
+  precioUnitario = df.iloc[indice,2]
+  
+  #actualizar los datos del producto
+  stock = int(stockActual) + cantidadProducto
+  entrada = int(entradaActual) + cantidadProducto
+  total = precioUnitario * entrada
+  #actualizar el documento
+  df.loc[indice, 'PRECIO TOTAL'] = total
+  df.loc[indice, 'ENTRADAS'] = entrada
+  df.loc[indice, 'STOCK'] = stock
+  df.to_csv("productos.csv", index=False)
+  print(df.to_string(index=False))
 
 def generarReporteVentas():
   """
