@@ -127,7 +127,7 @@ def registrarProducto():
     precioTotal = precioProducto * cantidadProducto
     fechaActual = datetime.date.today().strftime( "%d/%m/%Y")
 
-    archivo.write(nombreProducto + "," + str(fechaActual) + "," + str(precioProducto) + "," + str(precioTotal) + "," + str(cantidadProducto) + "," + ","+ str(cantidadProducto) + "\n")
+    archivo.write(nombreProducto + "," + str(fechaActual) + "," + str(precioProducto) + "," + str(precioTotal) + "," + str(cantidadProducto) + "," + ","+ str(cantidadProducto) + ','+"\n")
     archivo.close()
   except:
     print('Error al ingresar los datos')
@@ -204,15 +204,17 @@ def registrarSalida():
 
     salidaProducto = df.iloc[indice,5]
     stockActual = df.iloc[indice,6]
-  
+    precio = df.iloc[indice,2]
+
     if int(stockActual) < int(cantidadProducto):
       print(f'La cantidad de {nombreProducto}s no es suficente para consilidar la venta\n')
     else:
       stock = int(stockActual) - int(cantidadProducto)
       actualizacionSalida = int(salidaProducto) + int(cantidadProducto)
-
+      totalVentas = actualizacionSalida * precio
       df.loc[indice,'SALIDAS'] = actualizacionSalida
       df.loc[indice,'STOCK'] = stock
+      df.loc[indice,'TOTAL VENTAS'] = totalVentas
       df.to_csv('productos.csv',index=False)
       print('Datos actualizados')
       print(df.to_string(index=False))
@@ -252,7 +254,7 @@ def generarReporteVentas():
   df = pd.read_csv('productos.csv')
 
   # Calcular el total de ventas
-  totalVenta = df['SALIDAS'].sum()
+  totalVenta = df['TOTAL VENTAS'].sum()
 
   # Ordenar los datos según las ventas
   dfOrdenado = df.sort_values('SALIDAS', ascending=False)
