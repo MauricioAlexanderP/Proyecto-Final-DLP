@@ -148,23 +148,22 @@ def buscarProducto():
   Función que busca un producto por su nombre.
   Lee los datos del archivo CSV y muestra la información del producto si es encontrado.
   """
-  try:
-    df = pd.read_csv("productos.csv")
-    
-    nombreProducto = str(input("Ingrese el nombre del producto a buscar: "))
-    
-    producto = df.iloc[df.index[df['NOMBRE'] == nombreProducto].tolist()[0], :]
-    
-    if not producto.empty:
-      print(f"{'NOMBRE':<16}{'FECHA':<16}{'PRECIO UNITARIO':<16}{'PRECIO TOTAL':<16}{'ENTRADAS':<16}{'SALIDAS':<16}{'STOCK':<16}")
-      print(f"{producto['NOMBRE']:<16}{producto['FECHA']:<16}{producto['PRECIO UNITARIO']:<16}{producto['PRECIO TOTAL']:<16}{producto['ENTRADAS']:<16}{producto['SALIDAS']:<16}{producto['STOCK']:<16}")
-    else:
-      print("El Producto no fue encontrado")
+  df = pd.read_csv("productos.csv")
+  try: 
+    # Pedir el nombre del producto a buscar
+      nombreProducto = str(input("Ingrese el nombre del producto a buscar: "))
+      producto = df[df['NOMBRE'] == nombreProducto]
+      if not producto.empty:
+        
+        print(f"{'NOMBRE':<16}{'FECHA':<16}{'PRECIO UNITARIO':<16}{'PRECIO TOTAL':<16}{'ENTRADAS':<16}{'SALIDAS':<16}{'STOCK':<16}")
+        
+        for index, row in producto.iterrows():
+          print(f"{row['NOMBRE']:<16}{row['FECHA']:<16}{row['PRECIO UNITARIO']:<16}{row['PRECIO TOTAL']:<16}{row['ENTRADAS']:<16}{row['SALIDAS']:<16}{row['STOCK']:<16}")
+      else:
+        print("El Producto no fue encontrado")
   except Exception as e:
     print("El Producto no fue encontrado")
-    print(f"Error: {e}") 
-    os.system('pause')
-    os.system('cls')
+    print(f"Error: {e}")
 
 def eliminarProducto():
   """
